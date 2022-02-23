@@ -11,7 +11,7 @@ type Candle @entity {
     lastBlock: Int!
     token0: Bytes!
     token1: Bytes!
-
+    pair: String!
     token0TotalAmount: BigInt!
     token1TotalAmount: BigInt!
     open: BigDecimal!
