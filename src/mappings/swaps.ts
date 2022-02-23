@@ -23,13 +23,11 @@ export function handleSwap(event: Swap): void {
     
     let pair = Pair.load(event.address.toHex());
     let price = token0Amount.divDecimal(token1Amount.toBigDecimal());
-    let tokens = concat(pair.token0, pair.token1);
     let timestamp = event.block.timestamp.toI32();
 
     let periods: i32[] = [5*60, 15*60, 60*60, 4*60*60, 24*60*60, 7*24*60*60];
     for (let i = 0; i < periods.length; i++) {
-        let time_id = timestamp / periods[i];
-        let candle_id = concat(concat(Bytes.fromI32(time_id), Bytes.fromI32(periods[i])), tokens).toHex();
+        let candle_id = pair.id;
         let candle = Candle.load(candle_id);
         if (candle === null) {
             candle = new Candle(candle_id);
